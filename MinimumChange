@@ -1,0 +1,60 @@
+/*
+	Author: Nidhi Bothra
+	Created On: 01-06-2019
+	Description: 	Takes amount as input
+					Minimum number of coins required to make the exact amount of change
+*/
+
+#include<iostream>
+#include<stdlib.h>
+
+using namespace std;
+
+//		Declarations
+int change(int amount, int coins[], int n, int cache[]);
+int change(int amount, int coins[], int n);
+
+//		Definitions
+int change(int amount, int coins[], int n) {
+	int *cache = (int*) malloc(amount*sizeof(int));
+	for (int i=0; i<amount; i++) {
+		cache[i] = -1;
+	}
+	return change(amount, coins, n, cache);
+}
+
+int change(int amount, int coins[], int n, int cache[]) {
+	int min=amount, c=0, i=0;
+	if (amount==0) {
+		return 0;
+	} else {
+		for (i=0; i<n; i++) {
+			if (amount-coins[i] >= 0) {
+				if (cache[amount-coins[i]] >= 0) {
+					c = cache[amount-coins[i]];
+				} else {
+					c = change(amount-coins[i], coins, n, cache);
+					cache[amount - coins[i]] = c;
+				}
+				if (min > c+1) {
+					min = c+1;
+				}
+			}
+		}
+		return min;
+	}
+}
+
+//		Main function
+int main() {
+	int amount, NoOfCoins = 0, coins[]={10,5,3,2,1}, n=5;
+	cout<<"Enter an amount: ";
+	cin>>amount;
+	if (amount<0) {
+		cout<<"Invalid amount entry!"<<endl;
+	} else {
+		NoOfCoins = change(amount, coins, n);
+		cout<<"Minimum of coins = "<<NoOfCoins<<endl;
+	}
+	return 0;
+}
