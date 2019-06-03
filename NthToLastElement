@@ -1,0 +1,77 @@
+/*
+	Author: Nidhi Bothra
+	Created On: 01-06-2019
+	Description:	Takes LinkedList as input
+					Displays LinkedList 
+					Finds & displays nth to last element in the list
+*/
+
+
+#include<iostream>
+#include<stdlib.h>
+#include<stdio.h>
+
+using namespace std;
+
+struct Node {
+	int value;
+	Node *next;
+};
+
+void addNodeToLinkedList(Node *start, int a) {
+	Node *newnode = (Node*) malloc(sizeof(Node));
+	newnode->next = NULL;
+	newnode->value = a;
+	Node *ptr = start;
+	while (ptr->next != NULL) {
+		ptr = ptr->next;
+	}
+	ptr->next = newnode;
+}
+
+void displayLinkedList(Node *start) {
+	Node *ptr = start;
+	while (ptr != NULL) {
+		cout<<ptr->value<<endl;
+		ptr = ptr->next;
+	}
+}
+
+void findNthToLastNode(Node *start, int n) {
+	Node *current = start, *follower = start;
+	int i=1;
+	while(i<=n && current->next != NULL) {
+		current = current->next;
+		i++;
+	}
+	
+	if (i<=n) {
+		cout<<"Invalid search!"<<endl;
+	} else {
+		while (current->next != NULL) {
+			current = current->next;
+			follower = follower->next;
+		}
+		cout<<n<<"th Node To Last = "<<follower->value<<endl;
+	}
+}
+
+int main() {
+	Node *start = (Node*) malloc(sizeof(Node));
+	start->next = NULL;
+	char ch;
+	int a, n;
+	do {
+		cout<<"Enter a number: ";
+		cin>>a;
+		addNodeToLinkedList(start, a);
+		cout<<"Do you want to continue entering?(Y/N): ";
+		cin>>ch;
+	} while (ch == 'Y' || ch == 'y');
+	start = start->next;
+	displayLinkedList(start);
+	cout<<"Enter n to search nth node to last: ";
+	cin>>n;
+	findNthToLastNode(start, n);
+	return 0;
+}
