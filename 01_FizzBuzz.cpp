@@ -1,3 +1,15 @@
+/* 	
+	Author: Nidhi Bothra
+	Created On: 30-05-2019
+	Description:	Takes a number as input upto which a series needs to be printed
+					Prints series from 1 to n  
+				if a number is divisible by 3 then print "Fizz" instead of that number
+				if a number is divisible by 5 then print "Buzz" instead of that number
+				if a number is divisible by 3 and 5 then print "FizzBuzz" instead of that number
+				else print the number
+*/
+
+
 #include<iostream>
 
 using namespace std;
@@ -24,4 +36,3 @@ int main() {
 	
 	return 0;
 }
-
