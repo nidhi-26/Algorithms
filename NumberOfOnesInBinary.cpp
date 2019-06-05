@@ -14,6 +14,8 @@ int onesInBinary(int n) {
 		sum += n & 1;
 		n >>= 1;
 	}
+	
+	return sum;
 }
 
 int main() {
